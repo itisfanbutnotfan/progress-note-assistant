@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+  /* ===== Material Design 3 色彩变量 ===== */
+  :root {
+    --bg: #f8f9fc; --surface: #ffffff; --container: #f0f4f9;
+    --primary: #0b57d0; --on-primary: #ffffff;
+    --primary-c: #d3e3fd; --on-primary-c: #041e49;
+    --sec-c: #c2e7ff; --on-sec-c: #001d35;
+    --text: #1f1f1f; --text-2: #444746;
+    --outline: #747775; --outline-v: #c4c7c5;
+    --err: #b3261e; --err-c: #f9dedc;
+    --mark: #fff0c2; --on-mark: #5c4300;
+    --ok-c: #c4eed0; --on-ok-c: #072711;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131314; --surface: #1e1f20; --container: #282a2c;
+      --primary: #a8c7fa; --on-primary: #062e6f;
+      --primary-c: #0842a0; --on-primary-c: #d3e3fd;
+      --sec-c: #004a77; --on-sec-c: #c2e7ff;
+      --text: #e3e3e3; --text-2: #c4c7c5;
+      --outline: #8e918f; --outline-v: #444746;
+      --err: #f2b8b5; --err-c: #8c1d18;
+      --mark: #4a3a00; --on-mark: #ffe082;
+      --ok-c: #0f5223; --on-ok-c: #c4eed0;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131314; --surface: #1e1f20; --container: #282a2c;
+    --primary: #a8c7fa; --on-primary: #062e6f;
+    --primary-c: #0842a0; --on-primary-c: #d3e3fd;
+    --sec-c: #004a77; --on-sec-c: #c2e7ff;
+    --text: #e3e3e3; --text-2: #c4c7c5;
+    --outline: #8e918f; --outline-v: #444746;
+    --err: #f2b8b5; --err-c: #8c1d18;
+    --mark: #4a3a00; --on-mark: #ffe082;
+    --ok-c: #0f5223; --on-ok-c: #c4eed0;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: Roboto, system-ui, sans-serif; font-size: 14px; line-height: 20px;
+    background: var(--bg); color: var(--text);
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+  .ic { width: 20px; height: 20px; fill: currentColor; flex: none; }
+
+  /* 顶部应用栏 */
+  .appbar { display: flex; align-items: center; gap: 12px; height: 64px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--outline-v); }
+  .appbar h1 { margin: 0; font-size: 22px; font-weight: 400; line-height: 28px; }
+  .appbar .ic { color: var(--primary); width: 24px; height: 24px; }
+
+  /* 整体布局：手机单列，≥840px 左列表右详情 */
+  .layout { display: grid; gap: 16px; padding: 16px; max-width: 1200px; margin: 0 auto; }
+  @media (min-width: 840px) { .layout { grid-template-columns: 340px 1fr; align-items: start; } }
+
+  /* 搜索与筛选卡片 */
+  .side { display: grid; gap: 16px; }
+  .filters { background: var(--surface); border-radius: 16px; padding: 16px; display: grid; gap: 12px; }
+  .filters h2 { margin: 0; font-size: 14px; font-weight: 500; color: var(--text-2); }
+  .field { display: grid; gap: 4px; }
+  .field label { font-size: 12px; color: var(--text-2); }
+  .field input, .field select { height: 48px; padding: 0 16px; font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--outline); border-radius: 4px; }
+  .field input:focus, .field select:focus { outline: 2px solid var(--primary); border-color: transparent; }
+  .count { margin: 0 12px 4px; color: var(--text-2); }
+  .nores { padding: 16px 12px; color: var(--text-2); }
+
+  /* 病人列表 */
+  .list { background: var(--surface); border-radius: 16px; padding: 8px; }
+  .list h2 { margin: 8px 12px; font-size: 14px; font-weight: 500; color: var(--text-2); }
+  .patient {
+    display: flex; align-items: center; gap: 12px; width: 100%; min-height: 72px; padding: 8px 12px;
+    border: 0; border-radius: 12px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+  }
+  .patient:hover { background: var(--container); }
+  .patient[aria-current="true"] { background: var(--sec-c); color: var(--on-sec-c); }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--primary-c); color: var(--on-primary-c); font-weight: 500; flex: none; }
+  .patient .who { flex: 1; min-width: 0; }
+  .patient b { display: block; font-weight: 500; font-size: 16px; line-height: 24px; }
+  .patient small { display: block; color: var(--text-2); }
+  .patient[aria-current="true"] small { color: var(--on-sec-c); }
+
+  /* 标签 chip */
+  .chip { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 8px; font-size: 12px; font-weight: 500; background: var(--container); color: var(--text-2); white-space: nowrap; }
+  .chip.crit { background: var(--err-c); color: var(--err); }
+  .chip.ok { background: var(--ok-c); color: var(--on-ok-c); }
+  .chip.ai { background: var(--primary-c); color: var(--on-primary-c); }
+
+  /* 详情区 */
+  .detail { display: grid; gap: 12px; min-width: 0; }
+  .card { background: var(--surface); border: 1px solid var(--outline-v); border-radius: 12px; padding: 16px; }
+  .empty { text-align: center; padding: 56px 16px; color: var(--text-2); }
+  .head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .head h2 { margin: 0; font-size: 24px; line-height: 32px; font-weight: 400; }
+  .head p { margin: 0; color: var(--text-2); }
+  .banner { display: flex; gap: 12px; align-items: flex-start; background: var(--primary-c); color: var(--on-primary-c); border-radius: 12px; padding: 12px 16px; }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .toolbar span { color: var(--text-2); }
+  .toolbar div { display: flex; gap: 8px; }
+
+  /* 按钮 */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 24px; border-radius: 20px; border: 0; font: inherit; font-weight: 500; cursor: pointer; background: transparent; color: var(--primary); }
+  .btn:hover { background: color-mix(in srgb, var(--primary) 10%, transparent); }
+  .btn.filled { background: var(--primary); color: var(--on-primary); }
+  .btn.filled:hover { background: color-mix(in srgb, var(--primary) 88%, black); }
+  .btn.outlined { border: 1px solid var(--outline); }
+  .btn.sm { padding: 0 16px; }
+  .icon-btn { width: 48px; height: 48px; border: 0; border-radius: 50%; background: transparent; color: var(--text-2); display: grid; place-items: center; cursor: pointer; }
+  .icon-btn:hover { background: var(--container); }
+
+  /* 病程分段卡片 */
+  .sec-head { display: flex; align-items: center; gap: 8px; }
+  .sec-head h3 { margin: 0; font-size: 16px; font-weight: 500; flex: 1; }
+  .sec-body { margin: 4px -8px 0; padding: 8px; border-radius: 8px; white-space: pre-wrap; line-height: 28px; }
+  .sent { border-radius: 4px; cursor: pointer; }
+  .sent:hover { background: var(--container); }
+  .sent.on { background: var(--primary-c); color: var(--on-primary-c); }
+  .trace { margin-top: 8px; padding: 8px 12px; border-radius: 8px; background: var(--primary-c); color: var(--on-primary-c); }
+  .trace.warn { background: var(--mark); color: var(--on-mark); }
+  li.hit { background: var(--primary-c); color: var(--on-primary-c); border-radius: 4px; padding: 2px 6px; margin-left: -6px; }
+  mark { background: var(--mark); color: var(--on-mark); padding: 0 4px; border-radius: 4px; }
+  textarea { width: 100%; min-height: 120px; margin-top: 8px; padding: 12px 16px; font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--outline); border-radius: 4px; resize: vertical; }
+  textarea:focus { outline: 2px solid var(--primary); border-color: transparent; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  details { margin-top: 12px; color: var(--text-2); }
+  details ul { margin: 8px 0 0; padding-left: 20px; }
+
+  /* 加载骨架 */
+  .skel { height: 14px; border-radius: 7px; margin: 10px 0; background: linear-gradient(90deg, var(--container) 25%, var(--outline-v) 50%, var(--container) 75%); background-size: 200% 100%; animation: sh 1.2s infinite; }
+  @keyframes sh { to { background-position: -200% 0; } }
+  @media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
+
+  /* 底部提示条 */
+  .snack { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 24px); opacity: 0; pointer-events: none; background: #313033; color: #f4eff4; padding: 14px 16px; border-radius: 4px; transition: .2s; }
+  .snack.show { opacity: 1; transform: translate(-50%, 0); }
